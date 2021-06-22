@@ -1,5 +1,6 @@
 const express = require('express');
-const serverController = require('./controller/serverController');
+const membersController = require('./controller/membersController');
+const moviesController = require('./controller/moviesController');
 const app = express();
 
 const movieBL = require('./model/movieBL');
@@ -8,29 +9,33 @@ const restDAL = require('./DAL/restDAL');
 
 // DB initialization
 (async () => {
-
     // Check if Movies DB is empty
-    if (await movieBL.contMovies() === 0) {
-        let movies = await restDAL.getMovies();            // Get All Movies from API
-        let moviesArr = movies.data.map(({id, name, genres, image, premiered}) =>
-            ({id, name, genres, image, premiered}));       // Filter relevant data from Movies API
-        await moviesArr.map(obj => movieBL.addMovie(obj))  // Add Movies to DB
+    if (await movieBL.countMovies() === 0) {
+        let movies = await restDAL.getMovies();               // Get All Movies from API
+        let moviesArr = movies.data.map(({name, genres, image, premiered}) =>
+            ({name, genres, image, premiered}));              // Filter relevant data from Movies API
+        await moviesArr.map(obj => movieBL.addMovie(obj))     // Add Movies to DB
+        console.log('Movies Collection Initialized...');
     }
     // Check if Members DB is empty
-    if(await memberBL.contMembers() === 0){
+    if(await memberBL.countMembers() === 0){
         let members = await restDAL.getMembers();             // Get All Members from API
-        let membersArr = members.data.map(({id, name, email, address}) =>
-            ({id, name, email, address}));                    // Filter relevant data from Members API
+        let membersArr = members.data.map(({name, email, address}) =>
+            ({name, email, address}));                        // Filter relevant data from Members API
         await membersArr.map(obj => memberBL.addMember(obj))  // Add Members to DB
+        console.log('Members Collection Initialized...');
     }
-
 })();
-
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-app.use('/api/data', serverController);
+/*
+RESTful Resource Naming Conventions
+https://nordicapis.com/10-best-practices-for-naming-api-endpoints/
+ */
+app.use('/api/members', membersController);
+app.use('/api/movies', moviesController);
 
 require('./config/database');
 

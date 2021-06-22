@@ -1,0 +1,35 @@
+GET http://localhost:8000/api/movies/
+Accept: application/json
+
+### Get Movie by ID
+GET http://localhost:8000/api/movies/60d1d91cdb9f6a603460c982
+Accept: application/json
+
+### Add Movie
+POST http://localhost:8000/api/movies/
+Content-Type: application/json
+
+{
+  "name": "ASML",
+  "genres": [
+    "Horror",
+    "Drama",
+    "Black Work"
+  ],
+  "image": "https://www.asml.com/logo.jpg",
+  "premiered": "12-12-12"
+}
+
+### Update Movie by ID
+PUT http://localhost:8000/api/movies/60d1d91cdb9f6a603460c982
+Content-Type: application/json
+
+{
+  "name": "Alexander",
+  "genres" : ["Horror", "Action", "Drama"],
+  "image" : {
+    "medium" : "some_MEDIUM_url",
+    "original" : "some_ORIGINAL_url"
+  },
+  "premiered" : "12-14-21 23:00"
+}

@@ -1,0 +1,26 @@
+GET http://localhost:8000/api/members/
+Accept: application/json
+
+### Get Member by ID
+GET http://localhost:8000/api/members/60d1bdb2e121461234155796
+Accept: application/json
+
+### Add Member
+POST http://localhost:8000/api/members/
+Content-Type: application/json
+
+{
+  "name": "Dimitry Serebrenikov",
+  "email": "dima.sereb@intel.com",
+  "city": "Yavne"
+}
+
+### Update Member by ID
+PUT http://localhost:8000/api/members/60d1bdb2e121461234155796
+Content-Type: application/json
+
+{
+  "name": "Alexander",
+  "email": "alex.lazarovichh@gmail.com",
+  "city": "Tel-Aviv"
+}

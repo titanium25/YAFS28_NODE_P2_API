@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
 let MovieSchema = new mongoose.Schema({
-    movieId: Number,
     name: String,
     genres: [String],
     image: {medium: String, original: String},
