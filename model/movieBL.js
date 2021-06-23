@@ -23,7 +23,7 @@ exports.addMovie = function (obj) {
         // console.log(movie)
         movie.save(function (err) {
             if (err) {
-                reject(err);
+                reject(console.log(err));
             } else {
                 resolve('Created with id: ' + movie._id)
             }
@@ -47,7 +47,7 @@ exports.getMovie = function (id) {
     return new Promise((resolve, reject) => {
         Movie.findById(id, function (err, data) {
             if (err) {
-                reject(err)
+                reject(console.log(err))
             } else {
                 resolve(data)
             }

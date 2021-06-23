@@ -33,3 +33,8 @@ Content-Type: application/json
   },
   "premiered" : "12-14-21 23:00"
 }
+
+### Get Movie by ID that DOSENT exists
+GET http://localhost:8000/api/movies/1
+Accept: application/json
+
