@@ -13,8 +13,12 @@ router.route('/')
 router.route('/:id')
     .get(async function (req, res) {
         let id = req.params.id;
-        let member = await movieBL.getMovie(id);
-        res.json(member);
+        if (id.match(/^[0-9a-fA-F]{24}$/)) {
+            let member = await movieBL.getMovie(id);
+            res.json(member);
+        } else {
+            res.status(404).send('Not Found')
+        }
     })
 
 // Add Movie
@@ -30,9 +34,13 @@ router.route('/')
 router.route('/:id')
     .put(async function (req, res) {
         let id = req.params.id;
-        let obj = req.body;
-        let status = await movieBL.updateMovie(id, obj);
-        res.json(status);
+        if (id.match(/^[0-9a-fA-F]{24}$/)) {
+            let obj = req.body;
+            let status = await movieBL.updateMovie(id, obj);
+            res.json(status);
+        } else {
+            res.status(404).send('Not Found')
+        }
     })
 
 // Delete Member
@@ -40,8 +48,12 @@ router.route('/:id')
     .delete(async function (req, res)
     {
         let id = req.params.id
-        let status = await movieBL.deleteMovie(id);
-        res.json(status)
+        if (id.match(/^[0-9a-fA-F]{24}$/)) {
+            let status = await movieBL.deleteMovie(id);
+            res.json(status)
+        } else {
+            res.status(404).send('Not Found')
+        }
     })
 
 module.exports = router;
