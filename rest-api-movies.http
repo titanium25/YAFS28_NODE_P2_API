@@ -2,7 +2,7 @@ GET http://localhost:8000/api/movies/
 Accept: application/json
 
 ### Get Movie by ID
-GET http://localhost:8000/api/movies/60d1d91cdb9f6a603460c982
+GET http://localhost:8000/api/movies/60d1d91cdb9f6a60346
 Accept: application/json
 
 ### Add Movie

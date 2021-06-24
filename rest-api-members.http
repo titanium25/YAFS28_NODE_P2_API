@@ -24,3 +24,7 @@ Content-Type: application/json
   "email": "alex.lazarovichh@gmail.com",
   "city": "Tel-Aviv"
 }
+
+### Get Member by ID that DOSENT EXISTS
+GET http://localhost:8000/api/members/1
+Accept: application/json
