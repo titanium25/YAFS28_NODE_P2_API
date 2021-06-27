@@ -13,6 +13,7 @@ router.route('/')
 router.route('/:id')
     .get(async function (req, res) {
         let id = req.params.id;
+        // Check if ObjectId is valid
         if (id.match(/^[0-9a-fA-F]{24}$/)) {
             let member = await memberBL.getMember(id);
             res.json(member);

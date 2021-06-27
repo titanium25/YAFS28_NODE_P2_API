@@ -13,6 +13,7 @@ router.route('/')
 router.route('/:id')
     .get(async function (req, res) {
         let id = req.params.id;
+        // Check if ObjectId is valid
         if (id.match(/^[0-9a-fA-F]{24}$/)) {
             let member = await movieBL.getMovie(id);
             res.json(member);
@@ -23,8 +24,7 @@ router.route('/:id')
 
 // Add Movie
 router.route('/')
-    .post(async function (req, res)
-    {
+    .post(async function (req, res) {
         let obj = req.body
         let status = await movieBL.addMovie(obj)
         res.json(status)
@@ -34,6 +34,7 @@ router.route('/')
 router.route('/:id')
     .put(async function (req, res) {
         let id = req.params.id;
+        // Check if ObjectId is valid
         if (id.match(/^[0-9a-fA-F]{24}$/)) {
             let obj = req.body;
             let status = await movieBL.updateMovie(id, obj);
@@ -45,9 +46,9 @@ router.route('/:id')
 
 // Delete Member
 router.route('/:id')
-    .delete(async function (req, res)
-    {
+    .delete(async function (req, res) {
         let id = req.params.id
+        // Check if ObjectId is valid
         if (id.match(/^[0-9a-fA-F]{24}$/)) {
             let status = await movieBL.deleteMovie(id);
             res.json(status)
