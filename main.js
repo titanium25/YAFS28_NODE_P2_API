@@ -2,10 +2,15 @@ const express = require('express');
 const membersController = require('./controller/membersController');
 const moviesController = require('./controller/moviesController');
 const app = express();
+const cors = require('cors')
+
+// Enable CORS
+app.use(cors())
 
 const movieBL = require('./model/movieBL');
 const memberBL = require('./model/memberBL');
 const restDAL = require('./DAL/restDAL');
+
 
 // DB initialization
 (async () => {
@@ -37,6 +42,8 @@ https://nordicapis.com/10-best-practices-for-naming-api-endpoints/
 app.use('/api/members', membersController);
 app.use('/api/movies', moviesController);
 
+
+
 require('./config/database');
 
-app.listen(8000);
+app.listen(2020);

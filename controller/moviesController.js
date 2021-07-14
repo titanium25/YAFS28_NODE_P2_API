@@ -5,8 +5,8 @@ const movieBL = require('../model/movieBL');
 // Get All Movies
 router.route('/')
     .get(async function (req, res) {
-        let members = await movieBL.getAllMovies()
-        res.json(members);
+        let movies = await movieBL.getAllMovies()
+        res.json(movies);
     })
 
 // Get Movie by Id
@@ -15,8 +15,8 @@ router.route('/:id')
         let id = req.params.id;
         // Check if ObjectId is valid
         if (id.match(/^[0-9a-fA-F]{24}$/)) {
-            let member = await movieBL.getMovie(id);
-            res.json(member);
+            let movie = await movieBL.getMovie(id);
+            res.json(movie);
         } else {
             res.status(404).send('Not Found')
         }
