@@ -20,7 +20,6 @@ exports.addMovie = function (obj) {
             image : obj.image,
             premiered : obj.premiered
         });
-        // console.log(movie)
         movie.save(function (err) {
             if (err) {
                 reject(console.log(err));

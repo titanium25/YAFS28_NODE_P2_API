@@ -16,11 +16,12 @@ const restDAL = require('./DAL/restDAL');
 (async () => {
     // Check if Movies DB is empty
     if (await movieBL.countMovies() === 0) {
+        console.log('Start movie collection initialization...');
         let movies = await restDAL.getMovies();               // Get All Movies from API
         let moviesArr = movies.data.map(({name, genres, image, premiered}) =>
             ({name, genres, image, premiered}));              // Filter relevant data from Movies API
         await moviesArr.map(obj => movieBL.addMovie(obj))     // Add Movies to DB
-        console.log('Movies Collection Initialized...');
+        console.log('Movie collection initialization done...');
     }
     // Check if Members DB is empty
     if(await memberBL.countMembers() === 0){

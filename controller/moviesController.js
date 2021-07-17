@@ -26,6 +26,7 @@ router.route('/:id')
 router.route('/')
     .post(async function (req, res) {
         let obj = req.body
+        console.log(obj)
         let status = await movieBL.addMovie(obj)
         res.json(status)
     })
@@ -44,7 +45,7 @@ router.route('/:id')
         }
     })
 
-// Delete Member
+// Delete Movie
 router.route('/:id')
     .delete(async function (req, res) {
         let id = req.params.id
