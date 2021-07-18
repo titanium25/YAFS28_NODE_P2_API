@@ -5,14 +5,15 @@ const movieBL = require('../model/movieBL');
 // Get All Movies
 router.route('/')
     .get(async function (req, res) {
-        let page = parseInt(req.query.page) || 1
-        let size = parseInt(req.query.size) || 10
-
-        const movies = await movieBL.getAllMovies(page, size)
+        let page = parseInt(req.query.page) || 1;
+        let size = parseInt(req.query.size) || 10;
+        let find = req.query.find || '';
+        console.log(find)
+        const movies = await movieBL.getAllMovies(page, size, find)
         res.json(movies);
     })
 
-// Get All Movies
+// Get search
 router.route('/search')
     .get(async function (req, res) {
         const movies = await movieBL.search()

@@ -22,8 +22,8 @@ exports.addMovie = function (obj) {
     });
 }
 
-exports.getAllMovies = function (page, size){
-    return Movie.find({})
+exports.getAllMovies = function (page, size, find){
+    return Movie.find()
         .skip((size * page) - size)
         .limit(size)
 }
