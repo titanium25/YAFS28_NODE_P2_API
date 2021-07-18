@@ -1,15 +1,7 @@
 const Movie = require('./movieModel')
 
 exports.countMovies = function () {
-    return new Promise((resolve, reject) => {
-        Movie.countDocuments({}, function (err, data) {
-            if (err) {
-                reject(err)
-            } else {
-                resolve(data)
-            }
-        })
-    })
+      return Movie.countDocuments({});
 }
 
 exports.addMovie = function (obj) {
@@ -30,28 +22,18 @@ exports.addMovie = function (obj) {
     });
 }
 
-exports.getAllMovies = function (){
-    return new Promise((resolve, reject) => {
-        Movie.find({}, function (err, data) {
-            if (err) {
-                reject(err)
-            } else {
-                resolve(data)
-            }
-        })
-    })
+exports.getAllMovies = function (page, size){
+    return Movie.find({})
+        .skip((size * page) - size)
+        .limit(size)
+}
+
+exports.search = function (){
+    return Movie.find({})
 }
 
 exports.getMovie = function (id) {
-    return new Promise((resolve, reject) => {
-        Movie.findById(id, function (err, data) {
-            if (err) {
-                reject(console.log(err))
-            } else {
-                resolve(data)
-            }
-        })
-    })
+       return  Movie.findById(id)
 }
 
 exports.updateMovie = function (id, obj) {
@@ -73,13 +55,5 @@ exports.updateMovie = function (id, obj) {
 }
 
 exports.deleteMovie = function (id){
-    return new Promise((resolve, reject) => {
-        Movie.findByIdAndDelete(id, function (err, data) {
-            if (err) {
-                reject(err)
-            } else {
-                resolve('Deleted!')
-            }
-        })
-    })
+       return  Movie.findByIdAndDelete(id);
 }
