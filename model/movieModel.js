@@ -6,5 +6,4 @@ let MovieSchema = new mongoose.Schema({
     premiered: String,
     image: String
 }, {collection : 'movies'})
-// MovieSchema.index({name: 'text'})
 module.exports = mongoose.model('Movie', MovieSchema)

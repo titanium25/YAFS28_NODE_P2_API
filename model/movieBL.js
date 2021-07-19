@@ -22,14 +22,16 @@ exports.addMovie = function (obj) {
     });
 }
 
-exports.getAllMovies = function (page, size, find){
+exports.getAllMovies = async function (page, size, find) {
+    const movies = await Movie.find({});
+    if (find) {
+        return movies.filter(movie =>
+            (movie.name.toLowerCase().includes(find.toLowerCase()) || find === '')
+        )
+    }
     return Movie.find()
         .skip((size * page) - size)
         .limit(size)
-}
-
-exports.search = function (){
-    return Movie.find({})
 }
 
 exports.getMovie = function (id) {

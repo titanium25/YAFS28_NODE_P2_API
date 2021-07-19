@@ -8,15 +8,7 @@ router.route('/')
         let page = parseInt(req.query.page) || 1;
         let size = parseInt(req.query.size) || 10;
         let find = req.query.find || '';
-        console.log(find)
         const movies = await movieBL.getAllMovies(page, size, find)
-        res.json(movies);
-    })
-
-// Get search
-router.route('/search')
-    .get(async function (req, res) {
-        const movies = await movieBL.search()
         res.json(movies);
     })
 
@@ -43,16 +35,14 @@ router.route('/get/:id')
 // Add Movie
 router.route('/')
     .post(async function (req, res) {
-
         let obj = req.body
-        console.log(obj)
         let status = await movieBL.addMovie(obj)
         res.json(status)
     })
 
 // Update Movie
 router.route('/:id')
-    .put(async function (req, res) {
+    .patch(async function (req, res) {
         let id = req.params.id;
         // Check if ObjectId is valid
         if (id.match(/^[0-9a-fA-F]{24}$/)) {
