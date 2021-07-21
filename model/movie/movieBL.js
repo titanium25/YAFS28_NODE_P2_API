@@ -35,7 +35,7 @@ exports.getAllMovies = async function (page, size, find) {
 }
 
 exports.getMovie = function (id) {
-       return  Movie.findById(id)
+       return Movie.findById(id)
 }
 
 exports.updateMovie = function (id, obj) {

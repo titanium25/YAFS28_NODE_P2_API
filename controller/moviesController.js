@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const movieBL = require('../model/movieBL');
+const movieBL = require('../model/movie/movieBL');
 
 // Get All Movies
 router.route('/')

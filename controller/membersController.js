@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const memberBL = require('../model/memberBL');
+const memberBL = require('../model/member/memberBL');
 
 // Get All Members
 router.route('/')
@@ -10,7 +10,7 @@ router.route('/')
     })
 
 // Get Member by Id
-router.route('/:id')
+router.route('/get/:id')
     .get(async function (req, res) {
         let id = req.params.id;
         // Check if ObjectId is valid

@@ -1,20 +1,22 @@
 const express = require('express');
 const membersController = require('./controller/membersController');
 const moviesController = require('./controller/moviesController');
+const subsController = require('./controller/subsController');
+
 const app = express();
 const cors = require('cors')
 
 // Enable CORS
 app.use(cors())
 
-const movieBL = require('./model/movieBL');
-const memberBL = require('./model/memberBL');
+const movieBL = require('./model/movie/movieBL');
+const memberBL = require('./model/member/memberBL');
 const restDAL = require('./DAL/restDAL');
 
 
 // DB initialization
 (async () => {
-    // Check if Movies DB is empty
+    // Check if Movies Collection is empty
     if (await movieBL.countMovies() === 0) {
         console.log('Start movie collection initialization...');
         let movies = await restDAL.getMovies();               // Get All Movies from API
@@ -23,13 +25,14 @@ const restDAL = require('./DAL/restDAL');
         await moviesArr.map(obj => movieBL.addMovie(obj))     // Add Movies to DB
         console.log('Movie collection initialization done...');
     }
-    // Check if Members DB is empty
+    // Check if Members Collection is empty
     if(await memberBL.countMembers() === 0){
+        console.log('Start member collection initialization...');
         let members = await restDAL.getMembers();             // Get All Members from API
         let membersArr = members.data.map(({name, email, address}) =>
             ({name, email, address}));                        // Filter relevant data from Members API
         await membersArr.map(obj => memberBL.addMember(obj))  // Add Members to DB
-        console.log('Members Collection Initialized...');
+        console.log('Member collection initialization done...');
     }
 })();
 
@@ -42,7 +45,7 @@ https://nordicapis.com/10-best-practices-for-naming-api-endpoints/
  */
 app.use('/api/members', membersController);
 app.use('/api/movies', moviesController);
-
+app.use('/api/subs', subsController);
 
 
 require('./config/database');
