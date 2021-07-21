@@ -31,16 +31,14 @@ exports.addMember = function (obj) {
     });
 }
 
-exports.getAllMembers = function (){
-    return new Promise((resolve, reject) => {
-        Member.find({}, function (err, data) {
-            if (err) {
-                reject(err)
-            } else {
-                resolve(data)
-            }
-        })
-    })
+exports.getAllMembers = async function (find) {
+    const members = await Member.find({});
+    if (find) {
+        return members.filter(member =>
+            (member.name.toLowerCase().includes(find.toLowerCase()) || find === '')
+        )
+    }
+    return Member.find({})
 }
 
 exports.getMember = function (id) {

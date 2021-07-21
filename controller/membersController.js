@@ -5,7 +5,8 @@ const memberBL = require('../model/member/memberBL');
 // Get All Members
 router.route('/')
     .get(async function (req, res) {
-        let members = await memberBL.getAllMembers();
+        let find = req.query.find || '';
+        let members = await memberBL.getAllMembers(find);
         res.json(members);
     })
 
