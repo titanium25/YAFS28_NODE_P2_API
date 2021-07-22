@@ -44,4 +44,17 @@ router.route('/:memberId')
         }
     })
 
+// Update Subs
+router.route('/:id')
+    .put(async function (req, res) {
+        let id = req.params.id;
+        // Check if ObjectId is valid
+        if (id.match(/^[0-9a-fA-F]{24}$/)) {
+            let status = await subsBL.updateSubs(id);
+            res.json(status);
+        } else {
+            res.status(404).send('Not Found')
+        }
+    })
+
 module.exports = router;

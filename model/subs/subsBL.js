@@ -50,3 +50,16 @@ exports.deleteSubs = function (memberId) {
     const filter = {memberId};
     return Subs.deleteOne(filter);
 }
+
+exports.updateSubs = function (id) {
+    return new Promise((resolve, reject) => {
+        const update = { $pull: { movies: {movieId : id} }}
+        Subs.updateMany({}, update, function (err) {
+            if (err) {
+                reject(err)
+            } else {
+                resolve('Updated!')
+            }
+        })
+    });
+}
