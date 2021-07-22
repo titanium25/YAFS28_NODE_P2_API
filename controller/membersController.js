@@ -11,12 +11,12 @@ router.route('/')
     })
 
 // Get Member by Id
-router.route('/get/:id')
+router.route('/get/:memberId')
     .get(async function (req, res) {
-        let id = req.params.id;
+        let memberId = req.params.memberId;
         // Check if ObjectId is valid
-        if (id.match(/^[0-9a-fA-F]{24}$/)) {
-            let member = await memberBL.getMember(id);
+        if (memberId.match(/^[0-9a-fA-F]{24}$/)) {
+            let member = await memberBL.getMember(memberId);
             res.json(member);
         } else {
             res.status(404).send('Not Found')
@@ -32,12 +32,12 @@ router.route('/')
     })
 
 // Update Member
-router.route('/:id')
+router.route('/:memberId')
     .put(async function (req, res) {
-        let id = req.params.id;
-        if (id.match(/^[0-9a-fA-F]{24}$/)) {
+        let memberId = req.params.memberId;
+        if (memberId.match(/^[0-9a-fA-F]{24}$/)) {
             let obj = req.body;
-            let status = await memberBL.updateMember(id, obj);
+            let status = await memberBL.updateMember(memberId, obj);
             res.json(status);
         } else {
             res.status(404).send('Not Found')
@@ -45,11 +45,11 @@ router.route('/:id')
     })
 
 // Delete Member
-router.route('/:id')
+router.route('/:memberId')
     .delete(async function (req, res) {
-        let id = req.params.id
-        if (id.match(/^[0-9a-fA-F]{24}$/)) {
-            let status = await memberBL.deleteMember(id);
+        let memberId = req.params.memberId
+        if (memberId.match(/^[0-9a-fA-F]{24}$/)) {
+            let status = await memberBL.deleteMember(memberId);
             res.json(status)
         } else {
             res.status(404).send('Not Found')

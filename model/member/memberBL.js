@@ -69,14 +69,7 @@ exports.updateMember = function (id, obj) {
     });
 }
 
-exports.deleteMember = function (id) {
-    return new Promise((resolve, reject) => {
-        Member.findByIdAndDelete(id, function (err) {
-            if (err) {
-                reject(err)
-            } else {
-                resolve('Deleted!')
-            }
-        })
-    })
+// Delete member by id
+exports.deleteMember = function (memberId) {
+    return Member.findByIdAndDelete(memberId)
 }
