@@ -10,7 +10,7 @@ exports.addMovie = function (obj) {
         let movie = new Movie({
             name : obj.name,
             genres : obj.genres,
-            image : obj.image,
+            image : obj.image.medium || obj.image,
             premiered : obj.premiered
         });
         movie.save(function (err) {

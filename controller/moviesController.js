@@ -55,7 +55,7 @@ router.route('/')
 
 // Update Movie
 router.route('/:id')
-    .patch(async function (req, res) {
+    .put(async function (req, res) {
         let id = req.params.id;
         // Check if ObjectId is valid
         if (id.match(/^[0-9a-fA-F]{24}$/)) {
