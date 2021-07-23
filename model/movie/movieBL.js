@@ -1,4 +1,5 @@
 const Movie = require('./movieModel')
+const subsBL = require('../subs/subsBL')
 
 exports.countMovies = function () {
       return Movie.countDocuments({});
@@ -32,6 +33,23 @@ exports.getAllMovies = async function (page, size, find) {
     return Movie.find()
         .skip((size * page) - size)
         .limit(size)
+}
+
+// Return movie list for dropdown menu with movies that member has not watched yet
+exports.dropDown = async function (memberId) {
+    // load member subscription
+    const subs = await subsBL.getSubs(memberId)
+
+    // not all members got subscription yet
+    if(subs) {
+        // pull movie id only
+        const moviesWatchedArr = subs.movies.map(obj => obj.movieId)
+        // return dropdown without movies that member watched
+        return Movie.find({_id: {$nin: moviesWatchedArr}});
+    } else {
+        // member has not got subscription yet, return all the movies
+        return Movie.find({})
+    }
 }
 
 exports.getMovie = function (id) {

@@ -12,6 +12,19 @@ router.route('/')
         res.json(movies);
     })
 
+// Movies drop down
+router.route('/dropDown/:memberId')
+    .get(async function (req, res) {
+        let memberId = req.params.memberId;
+        // Check if ObjectId is valid
+        if (memberId.match(/^[0-9a-fA-F]{24}$/)) {
+            let movie = await movieBL.dropDown(memberId)
+            res.json(movie);
+        } else {
+            res.status(404).send('Not Found')
+        }
+    })
+
 // Count number of movies
 router.route('/lib/count')
     .get(async function (req, res) {
